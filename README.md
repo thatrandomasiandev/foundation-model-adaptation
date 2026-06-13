@@ -124,19 +124,19 @@ src/fm_adapt/
 
 ## References
 
-- Arjovsky, M., Bottou, L., Gulrajani, I., & Lopez-Paz, D. (2019). Invariant risk minimization. *arXiv:1907.02893*.
-- Ben-David, S., Blitzer, J., Crammer, K., & Pereira, F. (2010). Analysis of representations for domain adaptation. *NeurIPS*.
-- Brown, T., et al. (2020). Language models are few-shot learners. *NeurIPS*.
-- Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers. *NAACL*.
-- Efron, B., & Tibshirani, R. J. (1993). *An Introduction to the Bootstrap*. Chapman & Hall.
-- Ganin, Y., et al. (2016). Domain-adversarial training of neural networks. *JMLR*.
-- Geifman, Y., & El-Yaniv, R. (2017). Selective classification for deep neural networks. *NeurIPS*.
-- Geirhos, R., et al. (2020). Shortcut learning in deep neural networks. *Nature Machine Intelligence*.
-- Guo, C., et al. (2017). On calibration of modern neural networks. *ICML*.
-- Hu, E. J., et al. (2022). LoRA: Low-rank adaptation of large language models. *ICLR*.
-- Pruthi, G., et al. (2020). Estimating training data influence by tracing gradient descent. *NeurIPS*.
-- Veitch, V., D'Amour, A., Yadlowsky, S., & Eisenstein, J. (2021). Counterfactual invariance to spurious correlations. *arXiv:1911.08714*.
-- Yosinski, J., Clune, J., Bengio, Y., & Lipson, H. (2014). How transferable are features in deep neural networks? *NeurIPS*.
+- Arjovsky, M., Bottou, L., Gulrajani, I., & Lopez-Paz, D. (2019). Invariant risk minimization. [arXiv](https://arxiv.org/abs/1907.02893)
+- Ben-David, S., Blitzer, J., Crammer, K., & Pereira, F. (2010). Analysis of representations for domain adaptation. *NeurIPS*. [Proceedings](https://papers.nips.cc/paper/2980-analysis-of-representations-for-domain-adaptation)
+- Brown, T., et al. (2020). Language models are few-shot learners. *NeurIPS*. [arXiv](https://arxiv.org/abs/2005.14165)
+- Devlin, J., Chang, M.-W., Lee, K., & Toutanova, K. (2019). BERT: Pre-training of deep bidirectional transformers for language understanding. *NAACL*. [arXiv](https://arxiv.org/abs/1810.04805)
+- Efron, B., & Tibshirani, R. J. (1993). *An Introduction to the Bootstrap*. Chapman & Hall. [DOI](https://doi.org/10.1201/9780429246593)
+- Ganin, Y., et al. (2016). Domain-adversarial training of neural networks. *JMLR*, 17(59), 1–35. [Paper](https://jmlr.org/papers/v17/15-239.html)
+- Geifman, Y., & El-Yaniv, R. (2017). Selective classification for deep neural networks. *NeurIPS*. [arXiv](https://arxiv.org/abs/1705.08500)
+- Geirhos, R., et al. (2020). Shortcut learning in deep neural networks. *Nature Machine Intelligence*, 2, 665–673. [DOI](https://doi.org/10.1038/s42256-020-00257-z)
+- Guo, C., et al. (2017). On calibration of modern neural networks. *ICML*. [arXiv](https://arxiv.org/abs/1706.04599)
+- Hu, E. J., et al. (2022). LoRA: Low-rank adaptation of large language models. *ICLR*. [arXiv](https://arxiv.org/abs/2106.09685)
+- Pruthi, G., et al. (2020). Estimating training data influence by tracing gradient descent. *NeurIPS*. [arXiv](https://arxiv.org/abs/2002.08484)
+- Veitch, V., D'Amour, A., Yadlowsky, S., & Eisenstein, J. (2021). Counterfactual invariance to spurious correlations. [arXiv](https://arxiv.org/abs/1911.08714)
+- Yosinski, J., Clune, J., Bengio, Y., & Lipson, H. (2014). How transferable are features in deep neural networks? *NeurIPS*. [arXiv](https://arxiv.org/abs/1411.1792)
 
 ---
 
