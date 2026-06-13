@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "fm-adapt"
 version = "0.1.0"
-description = "PhD-level foundation model adaptation: PEFT, domain adaptation, rigorous eval"
+description = "Research benchmarks for foundation model adaptation: PEFT, domain adaptation, and rigorous evaluation"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
