@@ -1,0 +1,4 @@
+seeds: [42, 43]
+epochs: 5
+spurious_strength: 0.9
+n_bootstrap: 100

@@ -1,0 +1,7 @@
+seeds: [42, 43]
+methods: [linear_probe, lora, full, dann]
+shift_levels: [0.5, 1.0]
+spurious_strength: 0.8
+pretrain_epochs: 3
+adapt_epochs: 5
+lora_rank: 8

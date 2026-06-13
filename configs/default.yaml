@@ -1,0 +1,14 @@
+seed: 42
+seeds: [42, 43, 44]
+n_classes: 2
+seq_len: 16
+vocab_size: 128
+spurious_strength: 0.8
+shift_strength: 1.0
+noise_rate: 0.05
+pretrain_epochs: 3
+adapt_epochs: 5
+epochs: 5
+lora_rank: 8
+batch_size: 32
+lr: 0.001
