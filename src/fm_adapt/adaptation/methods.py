@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+import logging
+from dataclasses import dataclass, field
 from typing import Literal
 
 import numpy as np
@@ -17,18 +18,98 @@ from fm_adapt.models.transformer import TransformerEncoder
 from fm_adapt.utils.device import get_device
 from fm_adapt.utils.seed import set_torch_seed
 
+logger = logging.getLogger(__name__)
+
 
 AdaptationMethod = Literal["full", "linear_probe", "lora", "dann"]
 
 
 @dataclass
+class AdaptationConfig:
+    """Unified configuration for all adaptation methods.
+
+    Bundles method selection with PEFT hyper-parameters and training schedule
+    so a single object drives the full adaptation pipeline.
+
+    Args:
+        method: Which adaptation strategy to apply.
+        rank: LoRA rank (ignored for non-LoRA methods).
+        alpha: LoRA scaling numerator (alpha / rank).
+        prefix_len: Number of soft prefix tokens (prefix-tuning only).
+        lr: Learning rate for the adaptation optimiser.
+        epochs: Number of training epochs.
+        batch_size: Mini-batch size.
+    """
+
+    method: AdaptationMethod = "lora"
+    rank: int = 8
+    alpha: float = 16.0
+    prefix_len: int = 10
+    lr: float = 5e-4
+    epochs: int = 5
+    batch_size: int = 32
+
+
+@dataclass
 class AdaptationResult:
+    """Container for adaptation experiment outputs.
+
+    Args:
+        method: Name of the adaptation method used.
+        model: The adapted model.
+        train_result: Detailed training history.
+        source_val_acc: Accuracy on the source validation split.
+        target_val_acc: Accuracy on the target validation split.
+        trainable_params: Number of trainable parameters during adaptation.
+    """
+
     method: str
     model: nn.Module
     train_result: TrainResult
     source_val_acc: float
     target_val_acc: float
     trainable_params: int
+
+
+def _freeze_backbone(model: nn.Module) -> int:
+    """Freeze every parameter in the model and return the total count.
+
+    Sets ``requires_grad = False`` on all parameters, preparing the model
+    for selective unfreezing of adapter / LoRA layers.
+
+    Args:
+        model: Model whose parameters will all be frozen.
+
+    Returns:
+        Total number of scalar parameters that were frozen.
+    """
+    total = 0
+    for param in model.parameters():
+        param.requires_grad = False
+        total += param.numel()
+    logger.info("Froze %d parameters", total)
+    return total
+
+
+def _compute_flop_ratio(model: nn.Module) -> float:
+    """Estimate the FLOPs ratio for adapted vs full model forward pass.
+
+    Approximation: each trainable parameter contributes ~2 FLOPs per sample
+    (one multiply, one add).  The ratio is trainable_flops / total_flops.
+
+    Args:
+        model: Model with a mix of frozen and trainable parameters.
+
+    Returns:
+        Ratio in [0, 1]; 1.0 means full fine-tuning, lower means cheaper.
+    """
+    total = sum(p.numel() for p in model.parameters())
+    trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
+    if total == 0:
+        return 0.0
+    ratio = trainable / total
+    logger.debug("FLOPs ratio: %.4f (trainable=%d, total=%d)", ratio, trainable, total)
+    return ratio
 
 
 def _build_model(vocab_size: int, n_classes: int, seed: int) -> TransformerEncoder:
